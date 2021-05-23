@@ -281,6 +281,7 @@ function mostrarResumen(){
     serviciosCita.appendChild(headingServicios);
 
 
+    let cantidad = 0;
     // Iterar sobre el arreglo de Servicios
     console.log(servicios)
     servicios.forEach(servicio => {
@@ -296,6 +297,9 @@ function mostrarResumen(){
         precioServicio.textContent = precio;
         precioServicio.classList.add('precio');
 
+        const totalServicio = precio.split('$');
+        cantidad += parseInt(totalServicio[1].trim());
+
         // Colocar texto y precio en el DIv
         contenedorServicio.appendChild(textoServicio);
         contenedorServicio.appendChild(precioServicio);
@@ -304,14 +308,22 @@ function mostrarResumen(){
 
 
         
-    })
+    });
+    // console.log(cantidad)
+
     resumenDiv.appendChild(headingCita);
     resumenDiv.appendChild(nombreCita);
     resumenDiv.appendChild(fechaCita);
     resumenDiv.appendChild(horaCita);
 
     resumenDiv.appendChild(serviciosCita);
+    
+    const cantidadPagar = document.createElement('P')
+    cantidadPagar.classList.add('total')
+    cantidadPagar.innerHTML = `<span>Total a Pagar: </span>$ ${cantidad}`;
 
+
+    resumenDiv.appendChild(cantidadPagar);
 }
 
 function nombreCita(){
